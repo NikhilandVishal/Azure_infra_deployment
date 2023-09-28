@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "environment": {
+        "metadata": { "description": "Environment were the resourcegroup belongs" },
+        "type": "string",
+        "defaultValue": ""
+      },
+      "assetInsightId": {
+        "metadata": {"description": "Asset id of the application"},
+        "type": "string",
+        "defaultValue": "a206565"
+      },
+      "projectName":{
+        "metadata": {"description": "Project name"},
+        "type": "string",
+        "defaultValue": "knowledgesearch"
+      },
+      "location": {
+        "metadata": { "description": "The Azure location of the resourcegroup resource." },
+        "type": "string",
+        "defaultValue": "[deployment().location]"
+      },
+      "environmentType": {
+        "metadata": { "description": "Type of environment were the template will be deployed" },
+        "type": "string",
+        "allowedValues": [
+            "PRODUCTION",
+            "PRE-PRODUCTION",
+            "QUALITY ASSURANCE",
+            "INTEGRATION TESTING",
+            "DEVELOPMENT",
+            "LAB"
+        ]
+    }
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Resources/resourceGroups",
+        "apiVersion": "2020-06-01",
+        "name": "[concat(parameters('assetInsightId'), '-', parameters('projectName'), '-' , parameters('environment'), '-', parameters('location'))]",
+        "location": "[parameters('location')]",
+        "tags": {
+          "tr:application-asset-insight-id": "206565",
+          "tr:environment-type": "[parameters('environmentType')]",
+          "tr-project-name": "knowledgesearch"
+        },
+        "properties": {}
+      }
+    ]
+  }

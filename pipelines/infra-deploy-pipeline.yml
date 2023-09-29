@@ -19,8 +19,11 @@ parameters:
   - non-prod
   - prod
 
-variables: 
-- template: variables/azureinfra-vars-lab.yml
+variables:
+  subscriptionId: "72223035-7ef4-4918-a1d3-e7e63bd72a09"
+  armConnection: "azure-rm-service-conn"
+  RGmain: "azureinfra-rg-lab-eastus"
+  RGshared: "azureinfra-rg-common-eastus"
   
 stages:
 - stage: RG_main
@@ -38,8 +41,8 @@ stages:
               deploymentScope: 'Subscription'
               azureResourceManagerConnection: ${{ variables.armConnection}}
               subscriptionId: ${{ variables.subscriptionId}}
-              csmFile: "$(build.sourcesDirectory)/arm-templates/deploy/rg-deploy.json"
-              csmParametersFile: "$(build.sourcesDirectory)/arm-templates/params/rg-deploy-params.json"
+              csmFile: "$(Build.SourcesDirectory)/arm-templates/deploy/rg-deploy.json"
+              csmParametersFile: "$(Build.SourcesDirectory)/arm-templates/params/rg-deploy-params.json"
               overrideParameters: 
                 -environmentType ${{ parameters.environment }}
               deploymentMode: 'Incremental'

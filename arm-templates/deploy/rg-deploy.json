@@ -36,7 +36,7 @@
             "location": "[parameters('location')]",
             "tags": {
                 "tr:environment-type": "[parameters('environmentType')]",
-                "tr-project-name": "knowledgesearch"
+                "tr-project-name": "azureinfra"
             },
             "properties": {}
         }

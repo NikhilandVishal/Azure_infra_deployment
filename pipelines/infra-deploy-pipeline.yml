@@ -20,7 +20,7 @@ parameters:
   - prod
 
 variables: 
-- template: /pipelines/variables/azureinfra-vars-lab.yml
+- template: variables/azureinfra-vars-lab.yml
   
 stages:
 - stage: RG_main
@@ -38,8 +38,6 @@ stages:
               deploymentScope: 'Subscription'
               azureResourceManagerConnection: ${{ variables.armConnection}}
               subscriptionId: ${{ variables.subscriptionId}}
-              location: 'Central US'
-              templateLocation: 'Linked artifact'
               csmFile: "$(build.sourcesDirectory)/arm-templates/deploy/rg-deploy.json"
               csmParametersFile: "$(build.sourcesDirectory)/arm-templates/params/rg-deploy-params.json"
               overrideParameters: 

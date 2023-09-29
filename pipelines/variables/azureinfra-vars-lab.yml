@@ -1,0 +1,5 @@
+variables:
+  subscriptionId: "72223035-7ef4-4918-a1d3-e7e63bd72a09"
+  armConnection: "azure-rm-service-conn"
+  RGmain: "azureinfra-rg-lab-eastus"
+  RGshared: "azureinfra-rg-common-eastus"

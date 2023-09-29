@@ -9,11 +9,42 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+parameters:
+- name: environment
+  displayname: environment
+  type: string
+  default: lab
+  values:
+  - lab
+  - non-prod
+  - prod
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+variables: 
+- template: /pipelines/variables/azureinfra-vars-lab.yml
+  
+stages:
+- stage: RG_main
+  displayname: Deploy main ResourceGroup
+  jobs: 
+  - deployment: DeployCommonMain 
+    environment: ${{ parameters.environment }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureResourceManagerTemplateDeployment@3
+            displayName: Main RG Create/Update
+            inputs:
+              deploymentScope: 'Subscription'
+              azureResourceManagerConnection: ${{ variables.armConnection}}
+              subscriptionId: ${{ variables.subscriptionId}}
+              location: 'Central US'
+              templateLocation: 'Linked artifact'
+              csmFile: "$(Build.SourcesDirectory)/arm_templates/deploy/rg-deploye.json"
+              csmParametersFile: "$(Build.SourcesDirectory)/arm_templates/params/rg-deploy-params.json"
+              overrideParameters: '
+                -environmentType ${{ parameters.environment }}
+                '
+              deploymentMode: 'Incremental'
+              deploymentName: 'Resource_Group'
+ 

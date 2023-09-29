@@ -42,7 +42,7 @@ stages:
               azureResourceManagerConnection: ${{ variables.armConnection}}
               subscriptionId: ${{ variables.subscriptionId}}
               csmFile: '$(Build.SourcesDirectory)\arm-templates\deploy\rg-deploy.json'
-              csmParametersFile: '$(Build.SourcesDirectory)\arm-templates/params\rg-deploy-params.json'
+              csmParametersFile: '$(Build.SourcesDirectory)\arm-templates\params\rg-deploy-params.json'
               overrideParameters: 
                 -environmentType ${{ parameters.environment }}
               deploymentMode: 'Incremental'

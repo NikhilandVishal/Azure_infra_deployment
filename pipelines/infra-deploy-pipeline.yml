@@ -40,7 +40,7 @@ stages:
               subscriptionId: ${{ variables.subscriptionId}}
               location: 'Central US'
               templateLocation: 'Linked artifact'
-              csmFile: "arm_templates/deploy/rg-deploye.json"
+              csmFile: "arm_templates/deploy/rg-deploy.json"
               csmParametersFile: "arm_templates/params/rg-deploy-params.json"
               overrideParameters: 
                 -environmentType ${{ parameters.environment }}

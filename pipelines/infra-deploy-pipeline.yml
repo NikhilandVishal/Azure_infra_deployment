@@ -42,9 +42,7 @@ stages:
               templateLocation: 'Linked artifact'
               csmFile: "$(Build.SourcesDirectory)\arm_templates\deploy\rg-deploye.json"
               csmParametersFile: "$(Build.SourcesDirectory)\arm_templates\params\rg-deploy-params.json"
-              overrideParameters: '
-                -environmentType ${{ parameters.environment }}
-                '
+              overrideParameters: -environmentType ${{ parameters.environment }}
               deploymentMode: 'Incremental'
               deploymentName: 'Resource_Group'
  

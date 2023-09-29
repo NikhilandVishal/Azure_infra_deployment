@@ -11,7 +11,7 @@ pool:
 
 parameters:
 - name: environment
-  displayname: environment
+  displayName: environment
   type: string
   default: lab
   values:
@@ -24,7 +24,7 @@ variables:
   
 stages:
 - stage: RG_main
-  displayname: Deploy main ResourceGroup
+  displayName: Deploy main ResourceGroup
   jobs: 
   - deployment: DeployCommonMain 
     environment: ${{ parameters.environment }}

@@ -20,7 +20,7 @@ parameters:
   - prod
 
 variables:
-  - template: pipelines/variables/azureinfra-vars-lab.yml
+  - template: variables/azureinfra-vars-lab.yml
   
 stages:
 - stage: RG_main

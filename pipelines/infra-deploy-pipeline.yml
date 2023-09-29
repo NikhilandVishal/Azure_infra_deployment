@@ -42,6 +42,7 @@ stages:
                 deploymentScope: 'Subscription'
                 azureResourceManagerConnection: ${{ variables.armConnection}}
                 subscriptionId: ${{ variables.subscriptionId}}
+                location: 'East US'
                 csmFile: 'arm-templates/deploy/rg-deploy.json'
                 csmParametersFile: 'arm-templates/params/rg-deploy-params.json'
                 overrideParameters: 

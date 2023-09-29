@@ -35,16 +35,17 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: AzureResourceManagerTemplateDeployment@3
-            displayName: Main RG Create/Update
-            inputs:
-              deploymentScope: 'Subscription'
-              azureResourceManagerConnection: ${{ variables.armConnection}}
-              subscriptionId: ${{ variables.subscriptionId}}
-              csmFile: '../arm-templates/deploy/rg-deploy.json'
-              csmParametersFile: '../arm-templates/params/rg-deploy-params.json'
-              overrideParameters: 
-                -environmentType ${{ parameters.environment }}
-              deploymentMode: 'Incremental'
-              deploymentName: 'Resource_Group'
- 
+            - checkout: self
+            - task: AzureResourceManagerTemplateDeployment@3
+              displayName: Main RG Create/Update
+              inputs:
+                deploymentScope: 'Subscription'
+                azureResourceManagerConnection: ${{ variables.armConnection}}
+                subscriptionId: ${{ variables.subscriptionId}}
+                csmFile: 'arm-templates/deploy/rg-deploy.json'
+                csmParametersFile: 'arm-templates/params/rg-deploy-params.json'
+                overrideParameters: 
+                  -environmentType ${{ parameters.environment }}
+                deploymentMode: 'Incremental'
+                deploymentName: 'Resource_Group'
+  
